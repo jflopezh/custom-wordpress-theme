@@ -1,9 +1,12 @@
 <?php
 
 if ( ! function_exists('register_welia_custom_post_types') ) {
+	
     // Register Welia Custom Post Types
+    
     function register_welia_custom_post_types() {       
         // Provider 
+        
         $labels = array(
             'name'                  => _x( 'Providers', 'Post Type General Name', 'welia-health' ),
             'singular_name'         => _x( 'Provider', 'Post Type Singular Name', 'welia-health' ),
@@ -33,6 +36,7 @@ if ( ! function_exists('register_welia_custom_post_types') ) {
             'items_list_navigation' => __( 'Providers list navigation', 'welia-health' ),
             'filter_items_list'     => __( 'Filter Providers list', 'welia-health' ),
         );
+		
         $args = array(
             'label'                 => __( 'Provider', 'welia-health' ),
             'labels'                => $labels,
@@ -56,6 +60,7 @@ if ( ! function_exists('register_welia_custom_post_types') ) {
         register_post_type( 'provider', $args );
 
         // Location
+        
         $labels = array(
             'name'                  => _x( 'Locations', 'Post Type General Name', 'welia-health' ),
             'singular_name'         => _x( 'Location', 'Post Type Singular Name', 'welia-health' ),
@@ -85,6 +90,7 @@ if ( ! function_exists('register_welia_custom_post_types') ) {
             'items_list_navigation' => __( 'Locations list navigation', 'welia-health' ),
             'filter_items_list'     => __( 'Filter Locations list', 'welia-health' ),
         );
+		
         $args = array(
             'label'                 => __( 'Location', 'welia-health' ),
             'labels'                => $labels,
@@ -107,6 +113,7 @@ if ( ! function_exists('register_welia_custom_post_types') ) {
         register_post_type( 'location', $args );
 
         // Parent Service
+        
         $labels = array(
             'name'                  => _x( 'Parent Services', 'Post Type General Name', 'welia-health' ),
             'singular_name'         => _x( 'Parent Service', 'Post Type Singular Name', 'welia-health' ),
@@ -136,6 +143,7 @@ if ( ! function_exists('register_welia_custom_post_types') ) {
             'items_list_navigation' => __( 'Parent Services list navigation', 'welia-health' ),
             'filter_items_list'     => __( 'Filter Parent Services list', 'welia-health' ),
         );
+		
         $args = array(
             'label'                 => __( 'Parent Service', 'welia-health' ),
             'labels'                => $labels,
@@ -156,14 +164,71 @@ if ( ! function_exists('register_welia_custom_post_types') ) {
         );
 
         register_post_type( 'parent-service', $args );
+		
+		// Resource
+		
+		$labels = array(
+			'name'                  => _x( 'Resources', 'Post Type General Name', 'welia-health' ),
+			'singular_name'         => _x( 'Resource', 'Post Type Singular Name', 'welia-health' ),
+			'menu_name'             => __( 'Resources', 'welia-health' ),
+			'name_admin_bar'        => __( 'Resource', 'welia-health' ),
+			'archives'              => __( 'Resource Archives', 'welia-health' ),
+			'attributes'            => __( 'Resource Attributes', 'welia-health' ),
+			'parent_item_colon'     => __( 'Parent Resource:', 'welia-health' ),
+			'all_items'             => __( 'All Resources', 'welia-health' ),
+			'add_new_item'          => __( 'Add New Resource', 'welia-health' ),
+			'add_new'               => __( 'Add New', 'welia-health' ),
+			'new_item'              => __( 'New Resource', 'welia-health' ),
+			'edit_item'             => __( 'Edit Resource', 'welia-health' ),
+			'update_item'           => __( 'Update Resource', 'welia-health' ),
+			'view_item'             => __( 'View Resource', 'welia-health' ),
+			'view_items'            => __( 'View Resources', 'welia-health' ),
+			'search_items'          => __( 'Search Resource', 'welia-health' ),
+			'not_found'             => __( 'Not found', 'welia-health' ),
+			'not_found_in_trash'    => __( 'Not found in Trash', 'welia-health' ),
+			'featured_image'        => __( 'Featured Image', 'welia-health' ),
+			'set_featured_image'    => __( 'Set featured image', 'welia-health' ),
+			'remove_featured_image' => __( 'Remove featured image', 'welia-health' ),
+			'use_featured_image'    => __( 'Use as featured image', 'welia-health' ),
+			'insert_into_item'      => __( 'Insert into Resource', 'welia-health' ),
+			'uploaded_to_this_item' => __( 'Uploaded to this Resource', 'welia-health' ),
+			'items_list'            => __( 'Resources list', 'welia-health' ),
+			'items_list_navigation' => __( 'Resources list navigation', 'welia-health' ),
+			'filter_items_list'     => __( 'Filter Resources list', 'welia-health' ),
+		);
+		
+		$args = array(
+			'label'                 => __( 'Resource', 'welia-health' ),
+			'labels'                => $labels,
+			'supports'              => array( 'title', 'thumbnail'),
+			'hierarchical'          => false,
+			'public'                => true,
+			'show_ui'               => true,
+			'show_in_menu'          => true,
+			'menu_position'         => 5,
+			'menu_icon'             => 'dashicons-admin-media',
+			'show_in_admin_bar'     => true,
+			'show_in_nav_menus'     => true,
+			'can_export'            => true,
+			'has_archive'           => true,
+			'exclude_from_search'   => false,
+			'publicly_queryable'    => true,
+			'capability_type'       => 'page',
+		);
+
+		register_post_type( 'resource', $args );
     }
     add_action( 'init', 'register_welia_custom_post_types', 0 );
 }
 
 if ( ! function_exists( 'register_welia_custom_taxonomies' ) ) {
+	
     // Register Welia Custom Taxonomies
+    
     function register_welia_custom_taxonomies() {
+		
         // Provider Category
+        
         $labels = array(
             'name'                       => _x( 'Provider Categories', 'Taxonomy General Name', 'welia-health' ),
             'singular_name'              => _x( 'Provider Category', 'Taxonomy Singular Name', 'welia-health' ),
@@ -186,6 +251,7 @@ if ( ! function_exists( 'register_welia_custom_taxonomies' ) ) {
             'items_list'                 => __( 'Provider categories list', 'welia-health' ),
             'items_list_navigation'      => __( 'Provider categories list navigation', 'welia-health' ),
         );
+		
         $args = array(
             'labels'                     => $labels,
             'hierarchical'               => true,
@@ -195,8 +261,11 @@ if ( ! function_exists( 'register_welia_custom_taxonomies' ) ) {
             'show_in_nav_menus'          => true,
             'show_tagcloud'              => true,
         );
+		
         register_taxonomy( 'provider-category', array( 'provider' ), $args );
 
+		// Location Category
+		
         $labels = array(
             'name'                       => _x( 'Location Categories', 'Taxonomy General Name', 'welia-health' ),
             'singular_name'              => _x( 'Location Category', 'Taxonomy Singular Name', 'welia-health' ),
@@ -219,6 +288,7 @@ if ( ! function_exists( 'register_welia_custom_taxonomies' ) ) {
             'items_list'                 => __( 'Location categories list', 'welia-health' ),
             'items_list_navigation'      => __( 'Location categories list navigation', 'welia-health' ),
         );
+		
         $args = array(
             'labels'                     => $labels,
             'hierarchical'               => true,
@@ -228,7 +298,45 @@ if ( ! function_exists( 'register_welia_custom_taxonomies' ) ) {
             'show_in_nav_menus'          => true,
             'show_tagcloud'              => true,
         );
+		
         register_taxonomy( 'location-category', array( 'location' ), $args );
+		
+		// Resource Category
+		
+		$labels = array(
+			'name'                       => _x( 'Resource Categories', 'Taxonomy General Name', 'welia-health' ),
+			'singular_name'              => _x( 'Resource Category', 'Taxonomy Singular Name', 'welia-health' ),
+			'menu_name'                  => __( 'Resource Categories', 'welia-health' ),
+			'all_items'                  => __( 'All Resource Categories', 'welia-health' ),
+			'parent_item'                => __( 'Parent Resource Category', 'welia-health' ),
+			'parent_item_colon'          => __( 'Parent Resource Category:', 'welia-health' ),
+			'new_item_name'              => __( 'New Resource Category', 'welia-health' ),
+			'add_new_item'               => __( 'Add New Resource Category', 'welia-health' ),
+			'edit_item'                  => __( 'Edit Resource Category', 'welia-health' ),
+			'update_item'                => __( 'Update Resource Category', 'welia-health' ),
+			'view_item'                  => __( 'View Resource Category', 'welia-health' ),
+			'separate_items_with_commas' => __( 'Separate Resource categories with commas', 'welia-health' ),
+			'add_or_remove_items'        => __( 'Add or remove Resource categories', 'welia-health' ),
+			'choose_from_most_used'      => __( 'Choose from the most used', 'welia-health' ),
+			'popular_items'              => __( 'Popular Resource Categories', 'welia-health' ),
+			'search_items'               => __( 'Search Resource Categories', 'welia-health' ),
+			'not_found'                  => __( 'Not Found', 'welia-health' ),
+			'no_terms'                   => __( 'No Resource Categories', 'welia-health' ),
+			'items_list'                 => __( 'Resource categories list', 'welia-health' ),
+			'items_list_navigation'      => __( 'Resource categories list navigation', 'welia-health' ),
+		);
+
+		$args = array(
+			'labels'                     => $labels,
+			'hierarchical'               => true,
+			'public'                     => true,
+			'show_ui'                    => true,
+			'show_admin_column'          => true,
+			'show_in_nav_menus'          => true,
+			'show_tagcloud'              => true,
+		);
+
+		register_taxonomy( 'resource-category', array( 'resource' ), $args );
     }
     add_action( 'init', 'register_welia_custom_taxonomies', 0 );
 }

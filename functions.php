@@ -27,31 +27,28 @@ function child_enqueue_styles() {
  */
 include 'includes/custom-post-types-and-taxonomies.php';
 
+/**
+ * Setup custom Rest API Controller
+ */
+include 'includes/rest-api.php';
+
 add_action( 'wp_enqueue_scripts', 'child_enqueue_styles', 15 );
 
 function enqueue_welia_scripts() {
-    wp_register_script( 'welia_scripts', get_stylesheet_directory_uri() . '/assets/js/scripts.js', array('jquery'), CHILD_THEME_WELIA_HEALTH_VERSION, false );
-    wp_enqueue_script( 'jquery' );
-    wp_enqueue_script( 'jquery-ui-core'); 
-    wp_enqueue_script( 'welia_scripts' );
+    wp_register_script( 'welia-scripts', get_stylesheet_directory_uri() . '/assets/js/scripts.js', array('jquery', 'jquery-ui-core'), CHILD_THEME_WELIA_HEALTH_VERSION, false );
+	wp_register_script( 'welia-ajax', get_stylesheet_directory_uri() . '/assets/js/welia-ajax.js', array('jquery'), CHILD_THEME_WELIA_HEALTH_VERSION, true );
+	
+	wp_enqueue_script( 'jquery' );
+	wp_enqueue_script( 'welia-scripts' );
+	wp_enqueue_script( 'welia-ajax' );
 
-	wp_localize_script( 'welia_scripts', 'siteConfig', [
+	wp_localize_script( 'welia-ajax', 'siteConfig', [
 		'ajaxUrl'    => admin_url( 'admin-ajax.php' ),
 		'ajax_nonce' => wp_create_nonce( 'loadmore_post_nonce' ),
 	] );
 }
 
 add_action( 'wp_enqueue_scripts', 'enqueue_welia_scripts', 15);
-
-function add_type_attribute($tag, $handle, $src) {
-    if ( 'welia_scripts' !== $handle ) {
-        return $tag;
-    }
-    $tag = '<script type="module" src="' . esc_url( $src ) . '"></script>';
-    return $tag;
-}
-
-add_filter('script_loader_tag', 'add_type_attribute' , 10, 3);
 
 function register_menus() {
 	register_nav_menus([

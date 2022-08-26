@@ -28,15 +28,15 @@ get_header();
 		<div>
 			<span>Search, sort, subscribe</span>
 			<div class="search-bar">
-				<form action="" id="search-posts" class="search-bar-form flex-row">
+				<form action=""  class="search-bar-form flex-row">
 					<input type="image" src="/wp-content/uploads/2022/07/search-pink-icon.svg" width="50px">
-					<input type="text" name="search" placeholder="Fever">
+					<input id="filter-posts" type="text" name="search" placeholder="Fever">
 				</form>
 			</div>
 			<div class="search-bar">
-				<form action="" id="search-posts-cat" class="search-bar-form flex-row">
+				<form action="" class="search-bar-form flex-row">
 					<input type="image" src="/wp-content/uploads/2022/07/filter-pink-icon.svg" width="50px">
-					<input type="text" name="search" placeholder="Filter by Category">
+					<input id="filter-posts-cat" type="text" name="search" placeholder="Filter by Category">
 				</form>
 			</div>
 			<div class="search-bar">

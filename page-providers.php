@@ -3,38 +3,48 @@
  *  Template Name: Providers
  */
 get_header();
+
+
+$locations = get_terms( [ 'taxonomy' => 'location-category', 'hide_empty' => false ] );
+$specialties = get_terms( [ 'taxonomy' => 'provider-category', 'hide_empty' => false ] );
+
 ?>
 
 <section class="section providers-hero">
 	<h1>Find a provider</h1>
-	<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor 
-	incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud 
-	exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure 
-	dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+	<p>Search for any Welia Health provider by name, location or specialty.</p>
 	<div class="filters flex-row">
 		<div class="search-bar">
-			<form action="" id="search-providers-name" class="search-bar-form flex-row">
-				<input type="image" src="/wp-content/uploads/2022/07/search-pink-icon.svg" width="50px">
-				<input type="text" name="search" placeholder="Fever">
+			<form action="" class="search-bar-form flex-row">
+				<input type="image" src="/wp-content/uploads/2022/06/search-icon.svg" width="50px">
+				<input id="filter-providers" type="text" name="search" placeholder="Search by name or keyword">
 			</form>
 		</div>
 		<div class="search-bar">
-			<form action="" id="search-providers-location" class="search-bar-form flex-row">
-				<input type="image" src="/wp-content/uploads/2022/07/filter-pink-icon.svg" width="50px">
-				<input type="text" name="search" placeholder="Filter by Category">
+			<form action="" class="search-bar-form flex-row">
+				<input type="image" src="/wp-content/uploads/2022/08/filter-white-icon.svg" width="50px">
+				<select id="filter-providers-location">
+					<option value="" disabled selected>Filter by location</option>
+					<?php foreach( $locations as $location ) : ?>
+						<option value="<?= $location->name ?>"><?= $location->name ?></option>
+					<?php endforeach ?>
+				</select>
 			</form>
 		</div>
 		<div class="search-bar">
-			<form action="" id="search-providers-specialty" class="search-bar-form flex-row">
-				<input type="image" src="/wp-content/uploads/2022/07/filter-pink-icon.svg" width="50px">
-				<input type="text" name="search" placeholder="Email address to subscribe">
+			<form action="" class="search-bar-form flex-row">
+				<input type="image" src="/wp-content/uploads/2022/08/filter-white-icon.svg" width="50px">
+				<select id="filter-providers-specialty">
+					<option value="" disabled selected>Filter by medical specialty</option>
+					<?php foreach( $specialties as $specialty ) : ?>
+						<option value="<?= $specialty->name ?>"><?= $specialty->name ?></option>
+					<?php endforeach ?>
+				</select>
 			</form>
 		</div>
 	</div>
-	<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor 
-        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud 
-        exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure 
-        dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+	<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+		Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
 </section>
 
 <section class="providers-archive providers section">
@@ -47,7 +57,7 @@ get_header();
         $query = new WP_Query( $args );
 
         if ( $query->have_posts() ) : ?>
-        	<div class="providers-wrapper">
+        	<div id="providers-wrapper" class="wrapper providers-wrapper">
             <?php while ( $query->have_posts() ) : $query->the_post();
                 $locations = ucwords( str_replace( "_", " ", implode( ", ", get_field( "provider_locations" ) ) ) ); ?>
 				<div class="provider-card relative">

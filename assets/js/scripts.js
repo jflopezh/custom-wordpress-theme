@@ -1,5 +1,3 @@
-import './loadmore.js';
-
 jQuery(function($) {
     $(document).ready(function(){
         $("#toggle-menu").click(() => {
@@ -57,5 +55,17 @@ jQuery(function($) {
                 card2.height(card3.height() + "px");
             }
         }
+		
+		// Close local alert button
+		
+		$("#close-local-alert").click(() => {
+			$("#local-alert").slideUp(300);
+		});
+		
+		// Select resource redirection
+		
+		$("#select-resource").on("change", () => {
+			window.open($("#select-resource option:selected").val(), "_blank");
+		});
     });
 });

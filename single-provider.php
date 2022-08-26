@@ -58,7 +58,7 @@ get_header();
                         <div class="contact-card">
                             <div class="location flex-row">
                                 <img src="/wp-content/uploads/2022/06/location-icon.svg" width="40px" height="40px">
-                                <a href="<?php get_permalink( $location_post ) ?>"><h3><?= get_the_title( $location_post ) ?></h3>
+								<a href="<?php get_permalink( $location_post ) ?>"><h3><?= get_the_title( $location_post ) ?></h3></a>
                             </div>
                             <div class="details flex-row">
                                 <a href="tel: <?php the_field( 'location_phone', $location_post->ID ) ?>" class="phone">

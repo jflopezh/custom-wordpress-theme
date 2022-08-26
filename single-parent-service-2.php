@@ -1,34 +1,42 @@
 <?php
 /* 
- *  Template Name: Parent Service 
+ *  Template Name: Parent Service 2
  *  Template Post Type: parent-service
  */
 
 get_header();
 ?>
 
-<section class="section dual-hero right-background flex-row">
-    <div class="hero-content half flex-colum">
+<section class="section background-img-hero dual-hero flex-row .no-stack-mobile" style="background-image: url('<?php the_post_thumbnail_url( 'large' ) ?>');">
+    <div class="hero-content half">
         <h1><?php the_title() ?> services</h1>
         <p><?php the_field( 'hero_text' ) ?></p>
-		<?php if ( get_field( 'display_schedule_button' ) ) : ?>
-			<div class="arrow-link wp-block-button filled-button white blue">
-				<a href="#" class="wp-block-button__link">Schedule an appointment</a>
-			</div>
-		<?php endif ?>
     </div>
-    <div class="half background" style="background-image: url('<?php the_post_thumbnail_url( 'large' ) ?>')"></div>
+    <div class="half"></div>
 </section>
 
-<section class="section providers dual-section green">
-    <h2><?php the_field( 'providers_title' ) ?></h2>
-    <span class="search"><?php the_field( 'search_providers' ) ?></span>
-    <div class="search-bar">
-        <form action="" id="search-providers" class="search-bar-form flex-row">
-            <input type="image" src="/wp-content/uploads/2022/06/search-icon.svg">
-            <input type="text" name="search" placeholder="Search by first or last name">
-        </form>
-    </div>
+<?php if ( get_field( 'display_schedule_button' ) ) : ?>
+	<div class="schedule arrow-link wp-block-button filled-button white blue">
+		<a href="#" class="wp-block-button__link">Schedule an appointment</a>
+	</div>
+<?php endif ?>
+
+<section class="section providers dual-section-65 green">
+	<div class="head flex-row">
+		<div class="half">
+			<h2><?php the_field( 'providers_title' ) ?></h2>
+		</div>
+		<div class="half">
+			<div class="description"><?php the_field( 'description' ) ?></div>
+		</div>
+	</div>
+	<span class="search"><?php the_field( 'search_providers' ) ?></span>
+	<div class="search-bar">
+		<form action="" id="search-providers" class="search-bar-form flex-row">
+			<input type="image" src="/wp-content/uploads/2022/06/search-icon.svg">
+			<input type="text" name="search" placeholder="Search by first or last name">
+		</form>
+	</div>
     <?php 
         $args = array (
             'post_type'              => 'provider',
@@ -96,27 +104,19 @@ get_header();
         <?php endif;
     
         wp_reset_postdata() ?>
-    <div class="description tablet"><?php the_field( 'description' ) ?></div>
 </section>
 
-<section class="section services flex-row">
-    <div class="half left desktop">
-        <div class="description"><?php the_field( 'description' ) ?></div>
-        <div class="search-bar">
-            <form action="" id="search-services" class="search-bar-form flex-row">
-                <input type="image" src="/wp-content/uploads/2022/06/search-icon.svg">
-                <input type="text" name="search" placeholder="Search Family Medicine">
-            </form>
-        </div>
+<section class="section left-background dual-hero services flex-row">
+    <div class="half background" style="background-image: url('<?php the_field( 'services_image' ) ?>');">
     </div>
-    <div class="half right">
+    <div class="right">
         <h2>Explore <?php the_title() ?> services</h2>
         <div class="services-container">
             <?php foreach( get_field( 'services' ) as $service ) : ?>
             	<a href="<?= $service[ 'link' ] ?>" class="before-icon"><?= $service[ 'service' ] ?></a>
             <?php endforeach ?>
         </div>
-        <div class="search-bar tablet">
+        <div class="search-bar">
             <form action="" id="search-services" class="search-bar-form flex-row">
                 <input type="image" src="/wp-content/uploads/2022/06/search-icon.svg">
                 <input type="text" name="search" placeholder="<?php the_field( 'services_searchbar_placeholder' ) ?>">
@@ -259,13 +259,12 @@ get_header();
 <script>
     var swiper = new Swiper(".locations-swiper", {
         slidesPerView: 1,
-        centeredSlides: true,
         spaceBetween: 30,
         pagination: {
             el: ".swiper-pagination",
             clickable: true,
         },
-        /*breakpoints: {
+        breakpoints: {
             780: {
                 slidesPerView: 2,
                 spaceBetween: 20
@@ -274,7 +273,7 @@ get_header();
                 slidesPerView: 3,
                 spaceBetween: 30
             }
-        }*/
+        }
     });
 </script>
 
