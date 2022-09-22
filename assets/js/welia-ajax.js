@@ -16,7 +16,7 @@ jQuery(function ($) {
 			this.filterProvidersSpe = $("#filter-providers-specialty");
 			this.loadMoreBtn = $("#load-more");
 			this.isRequestProcessing = false;
-			this.currentRequest
+			this.currentRequest = null;
 			this.init();
 		}
 
@@ -101,15 +101,11 @@ jQuery(function ($) {
 				ajax_nonce: this.ajaxNonce,
 			}
 			
-			data.filter = "";
-			
 			if (keyword != "") {
-				data.filter += "keyword,";
 				data.keyword = keyword;
 			}
 			
 			if (category != "") {
-				data.filter += "taxonomy,";
 				data.taxonomy = "category";
 				data.term = category;
 			}
@@ -165,25 +161,19 @@ jQuery(function ($) {
 				ajax_nonce: this.ajaxNonce,
 			}
 			
-			data.filter = "";
-			
 			if (keyword != "") {
-				data.filter += "keyword,";
 				data.keyword = keyword;
 			}
 			
 			if (location != "" && specialty != "") {
-				data.filter += "field,";
 				data.key = "provider_locations";
 				data.value = location;
 				data.key2 = "provider_specialties";
 				data.value2 = specialty;
 			} else if (location != "") {
-				data.filter += "field,";
 				data.key = "provider_locations";
 				data.value = location;				
 			} else if (specialty != "") {
-				data.filter += "field,";
 				data.key = "provider_specialties";
 				data.value = specialty;	
 			}

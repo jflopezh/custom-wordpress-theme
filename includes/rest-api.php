@@ -126,18 +126,17 @@ class WPC_REST extends WP_REST_Controller
 
     private function get_filtered_posts_query($request)
     {
-		$filters = $request['filter'];
         $args = array(
             'post_type' => $request['post_type'],
             'posts_per_page' => $request['per_page'],
             'page' => $request['page'],
         );
 						  
-		if (str_contains($request['filter'], 'keyword')) {
+		if (isset($request['keyword'])) {
 			$args['s'] = $request['keyword'];
 		}
 
-		if (str_contains($request['filter'], 'field')) {
+		if (isset($request['key'])) {
 			$args['meta_query'] = 	array(
 										array(
 											'key' => $request['key'],
@@ -145,16 +144,17 @@ class WPC_REST extends WP_REST_Controller
 											'compare' => 'LIKE',
 										)
 									);
-			if ($request['key2']) {
-				$args['meta_query']['relation'] = 'AND';
-				array_push($args['meta_query'], array(
-													'key' => $request['key2'],
-													'value' => $request['value2'],
-													'compare' => 'LIKE',
-												));
-			}
+			
 		}
-		if (str_contains($request['filter'], 'taxonomy')) {
+		if (isset($request['key2'])) {
+			$args['meta_query']['relation'] = 'AND';
+			array_push($args['meta_query'], array(
+												'key' => $request['key2'],
+												'value' => $request['value2'],
+												'compare' => 'LIKE',
+											));
+		}
+		if (isset($request['taxonomy'])) {
 			$termIDs = get_terms(['taxonomy' 	=> 	$request['taxonomy'],
 									  'name__like' 	=> 	$request['term'],
 									  'fields' 		=> 	'ids', ]);
